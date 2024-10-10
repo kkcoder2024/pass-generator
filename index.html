@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+        integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>js_project_5_random_password_generater</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Generate a <br> <span>Random Password</span> </h1>
+        </div>
+
+        <div class="input_box">
+            <input type="text" placeholder="Password" id="password">
+            <i id="copy_press" onclick="copyPassword() " class="bi bi-clipboard-check"></i>
+            <i id="copy_done" class="bi bi-clipboard-check-fill"></i>
+        </div>
+
+        <div class="btn_box">
+            <button onclick="createPassword()" id="generate_btn"><i class="bi bi-lightning-charge-fill"></i>
+                Generate</button>
+        </div>
+    </div>
+
+    <script>
+        const passwordBox = document.getElementById('password');
+        const lenght = 15;
+        const copy = document.getElementById('copy_press');
+        const copied = document.getElementById('copy_done');
+
+
+        const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const loweCase = "abcdefghijklmnopqrstuvwxyz";
+        const number = "1234567890";
+        const symbol = "!@#$%^&*()_-+={}[]:;'?/>.<,~`";
+        const allChar = upperCase + loweCase + number + symbol;
+
+
+
+        function createPassword() {
+            let password = "";
+            password += upperCase[Math.floor(Math.random() * upperCase.length)];
+            password += loweCase[Math.floor(Math.random() * loweCase.length)];
+            password += number[Math.floor(Math.random() * number.length)];
+            password += symbol[Math.floor(Math.random() * symbol.length)];
+            while (lenght > password.length) {
+                password += allChar[Math.floor(Math.random() * allChar.length)];
+            }
+            passwordBox.value = password;
+            copy.style.display = "block";
+            copied.style.display = "none";
+        }
+        function copyPassword() {
+            passwordBox.select();
+            document.execCommand("copy");
+            copied.style.display = "block";
+            copy.style.display = "none";
+        }
+
+
+    </script>
+</body>
+</html>
